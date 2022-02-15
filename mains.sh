@@ -4,7 +4,7 @@ check () {
   which packer >/dev/null 2>&1
   sleep 3
   if [ $? = 0 ]; then #if PACKER is installed
-    echo "Packer Installation found, checking for Terraform Installation ...."
+    echo "Checking Terraform Installation ...."
     sleep 4
     printf "\n"
     which terraform >/dev/null 2>&1
@@ -25,7 +25,7 @@ check () {
 }
 
 data () {
-  printf "\tCollecting Variables,\n"
+  printf "\tCollecting Data's Required for Packer\n"
   read -p "Enter Access Key:" access
   export TF_VAR_ACCESS="$access"
   printf "\n"
@@ -69,23 +69,25 @@ packer () {
 }
 
 terraform () {
-  printf "\n\tData collection for EC2"
+  printf "\n\tCollecting Data Required for EC2"
+  printf "\n"
   printf "\n"
   read -p "Enter Key-Pair Name for the Instance (will create a new key pair):" key
   export TF_VAR_KEY=$key
   ssh-keygen -t rsa -N "" -f $key > /dev/null 2>&1
   sleep 3
   printf "\nKey-Pair $key has been created use $key.pub to access the Instance"
-  printf "\n"
+  printf "\n\t"
   read -p "Enter Ingress Ports for Instance (Eg: "20","21",etc):" iport
   export TF_VAR_IPORT="[$iport]"
   echo $TF_VAR_IPORT
+  sleep 2
   $(which terraform) -chdir="./terraform" init
   printf "\n"
-  echo "Completed Initialisation proceeding ..."
+  echo "Terraform Initialization completed proceeding ..."
   sleep 3
   printf "\n"
-  echo "You will soon get a preview of changes that will happen on AWS console,"
+  echo "You will soon get a preview of changes that would happen on AWS console,"
   sleep 3
   $(which terraform) -chdir="./terraform" apply
 }

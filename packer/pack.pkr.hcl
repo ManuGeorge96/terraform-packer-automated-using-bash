@@ -21,13 +21,13 @@ variable "img" {
 }
 locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
 
-source "amazon-ebs" "packer" {
+source "amazon-ebs" "packer"{
   ami_name      = "${var.project}-AMI-${local.timestamp}"
-  instance_type = "${var.type}"
-  region        = "${var.region}"
+  instance_type = var.type
+  region        = var.region
   source_ami_filter {
     filters = {
-      name                = "${var.img}"
+      name                = var.img
       virtualization-type = "hvm"
       root-device-type    = "ebs"
     }
@@ -46,7 +46,7 @@ source "amazon-ebs" "packer" {
 build {
   sources = ["source.amazon-ebs.packer"]
   provisioner "file" {
-    source      = "${var.path}"
+    source      = var.path
     destination = "~/script.sh"
   }
   provisioner "shell" {

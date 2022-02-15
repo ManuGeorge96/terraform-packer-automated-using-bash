@@ -23,6 +23,7 @@ check () {
     exit 0
   fi  
 }
+
 data () {
   printf "\tCollecting Variables,\n"
   read -p "Enter Access Key:" access
@@ -54,6 +55,7 @@ data () {
   export TF_VAR_PATH=$path
   packer
 }
+
 packer () {
   echo "Starting AMI Creation......"
   sleep 3
@@ -65,6 +67,7 @@ packer () {
   sleep 3
   terraform
 }
+
 terraform () {
   printf "\n\tData collection for EC2"
   printf "\n"

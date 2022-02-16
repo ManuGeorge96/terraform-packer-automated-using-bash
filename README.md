@@ -18,4 +18,5 @@ This repo consisit of a Bash Script which integrates both Terraform code and Pac
 # How To Use
 
 - ```sh
-   git clone 
+   git clone https://github.com/ManuGeorge96/terraform-packer-automated-using-bash.git
+  ``` 

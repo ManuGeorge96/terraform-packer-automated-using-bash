@@ -72,6 +72,7 @@ packer () {
 }
 
 terraform () {
+  printf "\n"	
   printf "\n\t<---Collecting Data Required for EC2--->"
   printf "\n"
   printf "\n"
@@ -79,10 +80,9 @@ terraform () {
   export TF_VAR_KEY=$key
   ssh-keygen -t rsa -N "" -f $key > /dev/null
   printf "\nKey-Pair $key has been created use $key.pub to access the Instance"
-  printf "\n\t"
-  read -p "Enter Ingress Ports for Instance (Eg: "20","21",etc):" iport
+  printf "\n"
+  read -p "Enter Ingress Ports for Instance (Eg: \"20\",\"21\",etc):" iport
   export TF_VAR_IPORT="[$iport]"
-  echo $TF_VAR_IPORT
   sleep 2
   $(which terraform) -chdir="./terraform" init
   printf "\n"

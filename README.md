@@ -15,6 +15,11 @@ This repo consisit of a Bash Script which integrates both Terraform code and Pac
   - Key-Pair Name
   - List of Ingress Ports
 
+# Outline 
+
+[<img align="center" alt="Unix" width="550" src="https://raw.githubusercontent.com/ManuGeorge96/ManuGeorge96/master/Tools/bash.drawio.png" />][ln]
+
+
 # How To Use
 
 - ```sh

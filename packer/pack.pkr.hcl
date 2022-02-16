@@ -19,6 +19,9 @@ variable "type" {
 variable "img" {
   default = env("TF_VAR_IMG")
 }
+variable "user" {
+  default = env("TF_VAR_USER")
+}
 locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
 
 source "amazon-ebs" "packer"{
@@ -36,7 +39,7 @@ source "amazon-ebs" "packer"{
   }
   access_key   = var.access
   secret_key   = var.secret
-  ssh_username = "ec2-user"
+  ssh_username = var.user
   tags = {
     Project  = "${var.project}"
     Name = "${var.project}-AMI-${local.timestamp}"

@@ -9,7 +9,7 @@ check () {
     printf "\n"
     which terraform >/dev/null 2>&1
     if [ $? = 0 ]; then
-      echo "Terraform installation found Proceeding ...."
+      echo "Terraform and Packer installations found Proceeding ...."
       sleep 3
       printf "\n"
       data
@@ -25,7 +25,8 @@ check () {
 }
 
 data () {
-  printf "\tCollecting Data's Required for Packer\n"
+  printf "\t<---Collecting Data's Required for Packer--->\n"
+  printf "\n"
   read -p "Enter Access Key:" access
   export TF_VAR_ACCESS="$access"
   printf "\n"
@@ -47,8 +48,10 @@ data () {
   read -p "Enter the option:" ans
   if [ $ans == '1' ]; then
     export TF_VAR_IMG="amzn2-ami-kernel-5.*-hvm-2.*-x86_64-gp2"
+    export TF_VAR_USER="ec2-user"
   else  
     export TF_VAR_IMG="ubuntu/images/hvm-ssd/ubuntu-*-amd64-server-*"
+    export TF_VAR_USER="ubuntu"
   fi 
   printf "\n"
   read -p "Enter Path of the provision file:" path
@@ -69,13 +72,12 @@ packer () {
 }
 
 terraform () {
-  printf "\n\tCollecting Data Required for EC2"
+  printf "\n\t<---Collecting Data Required for EC2--->"
   printf "\n"
   printf "\n"
   read -p "Enter Key-Pair Name for the Instance (will create a new key pair):" key
   export TF_VAR_KEY=$key
-  ssh-keygen -t rsa -N "" -f $key > /dev/null 2>&1
-  sleep 3
+  ssh-keygen -t rsa -N "" -f $key > /dev/null
   printf "\nKey-Pair $key has been created use $key.pub to access the Instance"
   printf "\n\t"
   read -p "Enter Ingress Ports for Instance (Eg: "20","21",etc):" iport

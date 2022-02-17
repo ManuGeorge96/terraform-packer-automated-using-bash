@@ -2,7 +2,7 @@
 
 # About
 
-This repo consisit of a Bash Script which integrates both Terraform code and Packer code for building an Infra. Terraform code will create Security Group, Key Pair, and EC2 Instance under te dfault VPC, Packer code creates an Custom AMI based on the provision script provided, the bash script also allows you to select which base AMI is required while building the AMI, right now I have included only two options Amazon Linux and Ubuntu.
+This repo consisit of a Bash Script which integrates both Terraform code and Packer code for building an Infra. Terraform code will create Security Group, Key Pair, and EC2 Instance under the dfault VPC, Packer code creates a Custom AMI based on the provision script provided, the bash script also allows you to select which base AMI is required while building the AMI, right now I have included only two options Amazon Linux and Ubuntu.
 
 # Input Data's Required
 

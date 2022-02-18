@@ -1,3 +1,5 @@
+[![Generic badge](https://img.shields.io/badge/BUILD-PASS-BLUE.svg)](https://shields.io/)
+
 ## terraform + packer automated using bash
 
 # About

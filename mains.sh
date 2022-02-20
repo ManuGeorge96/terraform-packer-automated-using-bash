@@ -64,11 +64,18 @@ packer () {
   sleep 3
   $(which packer) init packer/pack.pkr.hcl
   $(which packer) build packer/pack.pkr.hcl
-  printf "\n"
-  echo "AMI Creation Completed"
-  printf "\n Proceeding for Terraform Operations"
-  sleep 3
-  terraform
+  if [ $? > '0' ]; then
+    printf "\n\tProcess Terminated Unexpectedly\n"
+    printf "\n\tReverting Changes"
+    sleep 10
+    exit 0
+  else
+    printf "\n"
+    echo "AMI Creation Completed"
+    printf "\n Proceeding for Terraform Operations"
+    sleep 3
+    terraform
+  fi  
 }
 
 terraform () {
